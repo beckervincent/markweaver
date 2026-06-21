@@ -1,0 +1,40 @@
+name: Build and Package Chrome Extension
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-and-package:
+    name: Package Extension
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Verify extension structure
+        run: |
+          test -f manifest.json
+          test -f popup.html
+          test -f popup.css
+          test -f popup.js
+          test -f converter.js
+          test -d icons
+          test -f icons/icon.svg
+
+      - name: Package extension as ZIP
+        run: |
+          zip -r markweaver.zip manifest.json popup.html popup.css popup.js converter.js icons/
+
+      - name: Upload packaged ZIP artifact
+        uses: actions/upload-artifact@v5
+        with:
+          name: markweaver-extension
+          path: markweaver.zip
+          if-no-files-found: error
+          retention-days: 14
