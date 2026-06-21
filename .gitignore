@@ -1,0 +1,9 @@
+# Ignore reference code
+reference/
+
+# OS/System files
+.DS_Store
+Thumbs.db
+
+# Ignore compiled ZIP packages
+*.zip

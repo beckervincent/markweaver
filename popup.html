@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MarkWeaver - Web to Markdown Clipper</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="logo-area">
+        <svg class="header-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="24" height="24">
+          <defs>
+            <linearGradient id="headerAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#38bdf8" />
+              <stop offset="100%" stop-color="#6366f1" />
+            </linearGradient>
+          </defs>
+          <rect x="2" y="2" width="124" height="124" rx="28" fill="#0f172a" stroke="url(#headerAccent)" stroke-width="4" />
+          <path d="M 24,80 L 24,32 L 40,48 L 56,32 L 56,80 L 46,80 L 46,50 L 40,56 L 34,50 L 34,80 Z" fill="url(#headerAccent)" />
+          <path d="M 82,44 L 94,44 L 94,32 L 102,32 L 102,44 L 114,44 L 98,60 Z" fill="#f8fafc" />
+          <rect x="78" y="68" width="30" height="4" rx="2" fill="#94a3b8" />
+          <rect x="78" y="76" width="22" height="4" rx="2" fill="#94a3b8" />
+        </svg>
+        <span class="app-title">MarkWeaver</span>
+      </div>
+      <div class="header-actions">
+        <button id="btn-theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme">
+          <svg class="icon-sun" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="16" height="16">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+          <svg class="icon-moon hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="16" height="16">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+        <div class="app-badge">v1.0</div>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <div class="tab-info">
+        <span class="tab-origin-label">Target Site:</span>
+        <span id="tab-domain" class="tab-domain-value">Loading...</span>
+      </div>
+
+      <section id="permission-view" class="view-panel hidden">
+        <div class="panel-content text-center">
+          <div class="status-icon-wrapper pulse-blue">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-12 h-12 icon-lock">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+            </svg>
+          </div>
+          <h3>Access Permission Required</h3>
+          <p class="description-text">
+            To parse and extract content, this extension requires permission to read the active website.
+          </p>
+          
+          <div class="button-group-vertical">
+            <button id="btn-grant-site" class="btn btn-primary btn-glow">
+              <span class="btn-text">Grant Access to this Site</span>
+            </button>
+            <button id="btn-grant-all" class="btn btn-secondary">
+              Enable for All Websites
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section id="converter-view" class="view-panel">
+        <div class="settings-card">
+          <div class="settings-header">
+            <span class="settings-title">Conversion Settings</span>
+            <svg class="icon-cog" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="16" height="16">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+
+          <div class="settings-body">
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-label">Article Mode</span>
+                <span class="setting-desc">Clean header, footer, & sidebars</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="chk-article-mode" checked>
+                <span class="slider round"></span>
+              </label>
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-label">Include Links</span>
+                <span class="setting-desc">Keep hyperlinked text anchor URLs</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="chk-include-links" checked>
+                <span class="slider round"></span>
+              </label>
+            </div>
+
+            <div class="setting-row">
+              <div class="setting-info">
+                <span class="setting-label">Include Images</span>
+                <span class="setting-desc">Keep inline image links & alt-text</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="chk-include-images" checked>
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <button id="btn-convert" class="btn btn-primary btn-glow margin-top-md">
+          <span class="btn-text">Convert Webpage to Markdown</span>
+        </button>
+
+        <div id="converter-loader" class="loader-container hidden">
+          <div class="spinner"></div>
+          <span>Parsing page structures...</span>
+        </div>
+
+        <div id="results-panel" class="results-panel hidden">
+          <div class="results-meta">
+            <span class="stats-badge">
+              <strong id="stat-words">0</strong> words
+            </span>
+            <span class="stats-badge">
+              <strong id="stat-chars">0</strong> chars
+            </span>
+          </div>
+
+          <div class="preview-wrapper">
+            <textarea id="markdown-output" readonly placeholder="Markdown output will appear here..."></textarea>
+          </div>
+
+          <button id="btn-copy" class="btn btn-success btn-glow">
+            <svg class="icon-copy" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" width="18" height="18">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+            </svg>
+            <svg class="icon-check hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" width="18" height="18">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            <span id="btn-copy-text" class="btn-text">Copy Markdown</span>
+          </button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="converter.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
