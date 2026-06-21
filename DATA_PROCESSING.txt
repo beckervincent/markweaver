@@ -1,0 +1,50 @@
+MARKWEAVER - DATA PROCESSING & PRIVACY POLICY / DATENSCHUTZERKLÄRUNG
+===================================================================
+
+[English Version]
+
+MarkWeaver is a local-first Chrome Extension designed with absolute user privacy in mind. We believe that your data is your own. This document outlines how data is handled by the extension.
+
+1. NO DATA COLLECTION AND NO STORAGE
+MarkWeaver DOES NOT collect, harvest, store, track, transmit, or share any personal information, browsing history, user activities, or website content. 
+
+2. ON-DEVICE LOCAL PROCESSING
+All features of the extension operate entirely on your local machine (on-device):
+- HTML-to-Markdown conversion is performed purely inside the extension popup container on your computer.
+- Page text, HTML DOM structure, and site URLs are processed strictly in-memory during the active conversion step and are discarded immediately when the extension popup is closed or another page is converted.
+- No data is sent to external servers or third-party APIs. There are no remote tracking codes, analytical scripts, or network request frameworks included in the package.
+
+3. EXPLANATION OF PERMISSIONS
+To function correctly, the extension requests the following permissions from your browser:
+- "activeTab": Used to get the URL and access the content of the tab you are currently viewing when you click the extension button.
+- "scripting": Used to inject a local, transient script to retrieve the HTML structure of the active tab.
+- "clipboardWrite": Used to allow you to copy the generated Markdown directly to your computer's clipboard.
+- "storage": Used locally (chrome.storage.local) to persist your personal layout preferences (such as light/dark theme preference, and default checkboxes for article mode, images, and links) so that your configurations are kept for your next session.
+
+4. THIRD-PARTY SERVICES
+MarkWeaver does not utilize any third-party services, APIs, databases, or analytics engines. 
+
+-------------------------------------------------------------------
+
+[Deutsche Version]
+
+MarkWeaver ist eine lokale Chrome-Erweiterung, die mit Fokus auf absolute Privatsphäre entwickelt wurde. Ihre Daten gehören Ihnen. Dieses Dokument beschreibt, wie Daten von der Erweiterung verarbeitet werden.
+
+1. KEINE DATENERFASSUNG UND KEINE SPEICHERUNG
+MarkWeaver erfasst, sammelt, speichert, verfolgt, überträgt oder teilt KEINE personenbezogenen Daten, Browser-Verläufe, Benutzeraktivitäten oder Website-Inhalte.
+
+2. LOKALE VERARBEITUNG AUF DEM GERÄT
+Alle Funktionen der Erweiterung laufen ausschließlich lokal auf Ihrem Gerät (on-device):
+- Die HTML-zu-Markdown-Konvertierung wird vollständig innerhalb des Popup-Containers der Erweiterung auf Ihrem Computer durchgeführt.
+- Seiten-Texte, HTML-DOM-Strukturen und Web-URLs werden ausschließlich im Arbeitsspeicher (in-memory) während des aktiven Konvertierungsschritts verarbeitet und sofort verworfen, wenn das Popup geschlossen oder eine andere Seite geladen wird.
+- Es werden keine Daten an externe Server oder Drittanbieter-APIs gesendet. Es sind keine externen Tracking-Codes, Analyse-Skripte oder Netzwerk-Frameworks im Paket enthalten.
+
+3. ERKLÄRUNG DER BERECHTIGUNGEN
+Um ordnungsgemäß zu funktionieren, fordert die Erweiterung folgende Berechtigungen von Ihrem Browser an:
+- "activeTab": Wird verwendet, um auf die URL und den Inhalt des aktuellen Tabs zuzugreifen, wenn Sie auf das Symbol der Erweiterung klicken.
+- "scripting": Wird verwendet, um ein lokales, temporäres Skript einzuschleusen, das die HTML-Struktur des aktiven Tabs ausliest.
+- "clipboardWrite": Wird verwendet, um das konvertierte Markdown direkt in die Zwischenablage Ihres Computers zu kopieren.
+- "storage": Wird ausschließlich lokal (chrome.storage.local) verwendet, um Ihre Design-Präferenzen (z. B. helles/dunkles Design und Standard-Einstellungen für Artikel-Modus, Bilder und Links) zu speichern, damit diese bei der nächsten Verwendung erhalten bleiben.
+
+4. DIENSTE VON DRITTPARTNERN
+MarkWeaver nutzt keine Dienste, APIs, Datenbanken oder Analyse-Tools von Drittanbietern.
